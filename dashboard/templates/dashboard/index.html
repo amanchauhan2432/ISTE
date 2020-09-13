@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block main %}
+
+    <div>
+        <!-- <button onclick="open()">Create Event</button> -->
+        <h3>Create Event</h3>
+        <form id="eventForm" method="POST" enctype="multipart/form-data" class="col-4">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit">Create !</button>
+            <!-- <button onclick="close()">Hide</button> -->
+        </form>
+    </div>
+    <br>
+    {% if events %}
+    <h3>Events created till now</h3>
+    {% for event in events %}
+        <h4>{{ event.title }}</h4>
+
+    {% endfor %}
+    {% endif %}
+
+
+    <br><a href = "{% url 'attendance' %}" target="_blank" style="font-size: 20px;" >Create attendance sheet</a>
+
+    <br><a href = "{% url 'image_upload' %}" target="_blank" style="font-size: 20px;">Upload Images</a>
+    
+    <br><a href = "{% url 'show_newsletter' %}" target="_blank" style="font-size: 20px;">Send Newsletters</a>
+    <br><br><br>
+
+{% endblock %}
+<!-- event deletion -->
+<!-- <form method="POST">
+            Do you want to delete the event <h4>{{ event.title }}</h4>? This would delete its participant database also.
+            For confirmation please enter the name of the event here. {{ form|as_crispy_field }}
+            <button type="submit">Delete current event</button>
+        </form> -->
